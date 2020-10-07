@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <Display />
-      <div className="insert-area">
+      <div className="insert-drpodwon-container">
         <MyDropdown />
         <Insert />
       </div>
