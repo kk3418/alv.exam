@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 
-export default function Insert() {
+export default function Insert({ setDisplay }) {
     const [formValue, setFormValue] = useState({
         i1: '', i2: '', i3: '', i4: ''
     })
@@ -9,9 +9,13 @@ export default function Insert() {
         const {name, value} = event.target
         setFormValue(prev => ({
             ...prev,
-            [name]: value
+            [name]: value,
         }))
     }
+    const { i1, i2, i3, i4} = formValue;
+    useEffect(() => {
+        setDisplay(i1+i2+i3+i4);
+    }, [i1, i2, i3, i4, setDisplay]);
 
     return (
         <div className="insert-area">

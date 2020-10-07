@@ -1,11 +1,11 @@
 import React from 'react';
 
-export default function Display() {
+export default function Display({ display }) {
     return (
         <div className="display-area">
             <div className="display-box">
                 <div className="display-text">
-                    123
+                    { display }
                 </div>
             </div>
         </div>

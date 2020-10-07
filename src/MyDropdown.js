@@ -4,7 +4,7 @@ import { Dropdown, DropdownButton } from 'react-bootstrap';
 export default function MyDropdown() {
   return (
       <div className="dropdown">
-        <DropdownButton
+        <DropdownButton 
             as='ButtonGroup'
             drop='down'
             title='Single drop down'
