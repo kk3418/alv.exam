@@ -2,12 +2,16 @@ import React from 'react';
 import Display from './Display';
 import './App.css';
 import Insert from './Insert';
+import MyDropdown from './MyDropdown';
 
 function App() {
   return (
     <div className="App">
       <Display />
-      <Insert />
+      <div className="insert-area">
+        <MyDropdown />
+        <Insert />
+      </div>
     </div>
   );
 }

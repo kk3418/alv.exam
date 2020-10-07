@@ -14,7 +14,7 @@ export default function Insert() {
     }
 
     return (
-        <div className="insert-area">
+        <>
             <Form.Control className="insert-box"
                 placeholder='1'
                 name='i1'
@@ -40,6 +40,6 @@ export default function Insert() {
                 as={'input'}
                 value={formValue[3]}
             />
-        </div>
+        </>
     );
 }

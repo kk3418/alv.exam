@@ -10,10 +10,28 @@ html {
 
 .display-area {
   width: 30vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.display-box {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  border: 2px solid lightgray;
+}
+
+.display-text {
+  font-size: 36px;
+  padding: 60px 50px;
 }
 
 .insert-area {
   width: 70vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .insert-box {
@@ -21,7 +39,7 @@ html {
   height: 75px;
   font-size: 36px;
   padding: 10px;
-  margin-right: 40px;
+  border: 2px solid lightgray;
 }
 
 @media screen and (max-width: 700px) {

@@ -3,7 +3,11 @@ import React from 'react';
 export default function Display() {
     return (
         <div className="display-area">
-            <h1>display</h1>
+            <div className="display-box">
+                <div className="display-text">
+                    123
+                </div>
+            </div>
         </div>
     );
 }
