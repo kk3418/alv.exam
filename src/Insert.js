@@ -5,45 +5,40 @@ export default function Insert({ setDisplay }) {
     const [formValue, setFormValue] = useState({
         i1: '', i2: '', i3: '', i4: ''
     })
+    const formValue_keys = Object.keys(formValue)
+    let update = ''
+    formValue_keys.forEach(iter => {
+        update += formValue[iter]
+    })
     const handleChange = (event) => {
+        const pattern = /^([0-9]|\.)$|^$/
         const {name, value} = event.target
-        setFormValue(prev => ({
-            ...prev,
-            [name]: value,
-        }))
+        if (value.match(pattern)) {
+            setFormValue(prev => ({
+                ...prev,
+                [name]: value,
+            }))
+        }
     }
-    const { i1, i2, i3, i4} = formValue;
     useEffect(() => {
-        setDisplay(i1+i2+i3+i4);
-    }, [i1, i2, i3, i4, setDisplay]);
+        setDisplay(update)
+    },[update, setDisplay])
+
+    const form = (key, index) => (
+        <Form.Control key={key}
+            className="insert-box"
+            placeholder={index + 1}
+            name={`${key}`}
+            as={'input'}
+            value={formValue[key]}
+            onChange={handleChange}
+        /> 
+    )
+    console.log(formValue)
 
     return (
         <div className="insert-area">
-            <Form.Control className="insert-box"
-                placeholder='1'
-                name='i1'
-                as={'input'}
-                value={formValue[0]}
-                onChange={handleChange}
-            /> 
-            <Form.Control className="insert-box"
-                placeholder='2'
-                name='i2'
-                as={'input'}
-                value={formValue[1]}
-            />
-            <Form.Control className="insert-box"
-                placeholder='3'
-                name='i3'
-                as={'input'}
-                value={formValue[2]}
-            />
-            <Form.Control className="insert-box"
-                placeholder='4'
-                name='i4'
-                as={'input'}
-                value={formValue[3]}
-            />
+            { formValue_keys.map((v,i) => form(v,i)) }
         </div>
     );
 }

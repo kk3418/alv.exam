@@ -5,7 +5,7 @@ export default function Display({ display }) {
         <div className="display-area">
             <div className="display-box">
                 <div className="display-text">
-                    { display }
+                    { display === '' ? '--' : display}
                 </div>
             </div>
         </div>
