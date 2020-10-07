@@ -2,3 +2,30 @@ html {
   margin: 0;
   padding: 0;
 }
+
+.App {
+  display: flex;
+  justify-content: space-between;
+}
+
+.display-area {
+  width: 30vw;
+}
+
+.insert-area {
+  width: 70vw;
+}
+
+@media screen and (max-width: 700px) {
+  .App {
+    flex-wrap: wrap;
+  }
+
+  .display-area {
+    width: 100vw;
+  }
+
+  .insert-area {
+    width: 100vw;
+  }
+}
