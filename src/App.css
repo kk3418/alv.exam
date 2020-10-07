@@ -16,6 +16,14 @@ html {
   width: 70vw;
 }
 
+.insert-box {
+  width: 70px;
+  height: 75px;
+  font-size: 36px;
+  padding: 10px;
+  margin-right: 40px;
+}
+
 @media screen and (max-width: 700px) {
   .App {
     flex-wrap: wrap;
