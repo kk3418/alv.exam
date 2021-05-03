@@ -1,44 +1,87 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Form } from 'react-bootstrap';
 
-export default function Insert({ setDisplay }) {
-    const [formValue, setFormValue] = useState({
-        i1: '', i2: '', i3: '', i4: ''
-    })
-    const formValue_keys = Object.keys(formValue)
-    let update = ''
-    formValue_keys.forEach(iter => {
-        update += formValue[iter]
-    })
-    const handleChange = (event) => {
-        const pattern = /^([0-9]|\.)$|^$/
-        const {name, value} = event.target
-        if (value.match(pattern)) {
-            setFormValue(prev => ({
-                ...prev,
-                [name]: value,
-            }))
-        }
+export default function Insert({ state, dispatch }) {
+  const firstInput = useRef(null);
+  const secondInput = useRef(null);
+  const thirdInput = useRef(null);
+  const fourthInput = useRef(null);
+
+  const hanldeFocus = key => {
+    switch(key) {
+      case 'first':
+        firstInput.current.focus();
+        break;
+      case 'second':
+        secondInput.current.focus();
+        break;
+      case 'third':
+        thirdInput.current.focus();
+        break;
+      case 'fourth':
+        fourthInput.current.focus();
+        break;
+      default:
+        return
     }
-    useEffect(() => {
-        setDisplay(update)
-    },[update, setDisplay])
+  }
 
-    const form = (key, index) => (
-        <Form.Control key={key}
-            className="insert-box"
-            placeholder={index + 1}
-            name={`${key}`}
-            as={'input'}
-            value={formValue[key]}
-            onChange={handleChange}
-        /> 
-    )
-    console.log(formValue)
+  const handleChange = (event) => {
+    const pattern = /^([0-9]|\.){0,1}$/
+    const { name, value } = event.target
+    if (value.match(pattern)) {
+      dispatch({ type: name, payload: value})
+    }
+  }
 
-    return (
-        <div className="insert-area">
-            { formValue_keys.map((v,i) => form(v,i)) }
-        </div>
-    );
+  useEffect(() => {
+    for (let key in state) {
+      if (state[key] === '') {
+        hanldeFocus(key);
+        console.log(key);
+        break;
+      }
+    }
+  }, [state, firstInput]);
+
+  return (
+    <div className="insert-area">
+      <Form.Control
+        ref={firstInput}
+        className="insert-box"
+        placeholder='1'
+        name={'FIRST'}
+        as={'input'}
+        value={state.first}
+        onChange={handleChange}
+      />
+      <Form.Control
+        ref={secondInput}
+        className="insert-box"
+        placeholder='0'
+        name={'SECOND'}
+        as={'input'}
+        value={state.second}
+        onChange={handleChange}
+      />
+      <Form.Control
+        ref={thirdInput}
+        className="insert-box"
+        placeholder='.'
+        name={'THIRD'}
+        as={'input'}
+        value={state.third}
+        onChange={handleChange}
+      />
+      <Form.Control
+        ref={fourthInput}
+        className="insert-box"
+        placeholder='0'
+        name={'FOURTH'}
+        as={'input'}
+        value={state.fourth}
+        onChange={handleChange}
+      />
+    </div>
+  );
 }

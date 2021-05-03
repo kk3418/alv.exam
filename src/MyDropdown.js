@@ -5,7 +5,6 @@ export default function MyDropdown() {
   return (
       <div className="dropdown">
         <DropdownButton 
-            as='ButtonGroup'
             drop='down'
             title='Single drop down'
             variant='secondary'
