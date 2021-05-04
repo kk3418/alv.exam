@@ -38,11 +38,10 @@ export default function Insert({ state, dispatch }) {
     for (let key in state) {
       if (state[key] === '') {
         hanldeFocus(key);
-        console.log(key);
         break;
       }
     }
-  }, [state, firstInput]);
+  }, [state]);
 
   return (
     <div className="insert-area">
