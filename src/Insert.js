@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { Form } from 'react-bootstrap';
 
 export default function Insert({ state, dispatch }) {
@@ -7,24 +7,34 @@ export default function Insert({ state, dispatch }) {
   const thirdInput = useRef(null);
   const fourthInput = useRef(null);
 
-  const hanldeFocus = key => {
+  const changeDisabled = useCallback(target => {
+    target.disabled = !target.disabled;
+    if (!target.disabled){
+      target.focus();
+    }
+  }, []);
+
+  const hanldeFocus = useCallback(key => {
     switch(key) {
       case 'first':
         firstInput.current.focus();
         break;
       case 'second':
-        secondInput.current.focus();
+        changeDisabled(secondInput.current);
+        changeDisabled(firstInput.current);
         break;
       case 'third':
-        thirdInput.current.focus();
+        changeDisabled(thirdInput.current);
+        changeDisabled(secondInput.current);
         break;
       case 'fourth':
-        fourthInput.current.focus();
+        changeDisabled(fourthInput.current);
+        changeDisabled(thirdInput.current);
         break;
       default:
         return
     }
-  }
+  }, [changeDisabled]);
 
   const handleChange = (event) => {
     const pattern = /^([0-9]|\.){0,1}$/
@@ -41,7 +51,7 @@ export default function Insert({ state, dispatch }) {
         break;
       }
     }
-  }, [state]);
+  }, [state, hanldeFocus]);
 
   return (
     <div className="insert-area">
@@ -62,6 +72,7 @@ export default function Insert({ state, dispatch }) {
         as={'input'}
         value={state.second}
         onChange={handleChange}
+        disabled
       />
       <Form.Control
         ref={thirdInput}
@@ -71,6 +82,7 @@ export default function Insert({ state, dispatch }) {
         as={'input'}
         value={state.third}
         onChange={handleChange}
+        disabled
       />
       <Form.Control
         ref={fourthInput}
@@ -80,6 +92,7 @@ export default function Insert({ state, dispatch }) {
         as={'input'}
         value={state.fourth}
         onChange={handleChange}
+        disabled
       />
     </div>
   );

@@ -44,6 +44,10 @@ html {
   justify-content: space-around;
 }
 
+.insert-box:disabled {
+  background-color: white;
+}
+
 .insert-box {
   width: 70px;
   height: 75px;
