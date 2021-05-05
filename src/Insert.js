@@ -36,11 +36,14 @@ export default function Insert({ state, dispatch }) {
     }
   }, [changeDisabled]);
 
-  const handleChange = (event) => {
-    const pattern = /^([0-9]|\.){0,1}$/
+  const firstPattern = /^[1-9]{0,2}$/;
+  const otherPattern = /^([0-9]|\.){0,2}$/;
+  const lastPattern = /^[0-9]{0,2}$/;
+  const handleChange = pattern => event => {
     const { name, value } = event.target
     if (value.match(pattern)) {
-      dispatch({ type: name, payload: value})
+      const payload = value.length < 2 ? value : value.slice(1,2);
+      dispatch({ type: name, payload: payload });
     }
   }
 
@@ -62,7 +65,7 @@ export default function Insert({ state, dispatch }) {
         name={'FIRST'}
         as={'input'}
         value={state.first}
-        onChange={handleChange}
+        onChange={handleChange(firstPattern)}
       />
       <Form.Control
         ref={secondInput}
@@ -71,17 +74,17 @@ export default function Insert({ state, dispatch }) {
         name={'SECOND'}
         as={'input'}
         value={state.second}
-        onChange={handleChange}
+        onChange={handleChange(otherPattern)}
         disabled
       />
       <Form.Control
         ref={thirdInput}
         className="insert-box"
-        placeholder='.'
+        placeholder='0'
         name={'THIRD'}
         as={'input'}
         value={state.third}
-        onChange={handleChange}
+        onChange={handleChange(otherPattern)}
         disabled
       />
       <Form.Control
@@ -91,7 +94,7 @@ export default function Insert({ state, dispatch }) {
         name={'FOURTH'}
         as={'input'}
         value={state.fourth}
-        onChange={handleChange}
+        onChange={handleChange(lastPattern)}
         disabled
       />
     </div>
